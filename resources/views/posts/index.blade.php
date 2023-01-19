@@ -5,7 +5,7 @@
             <div class="PostsAndCategories d-flex justify-content-between">
                 <div class="posts col-8  p-3 border border-1">
                     <h1>Posts</h1>
-                    @foreach ($posts as $post)
+                    @foreach ($posts as $post) 
                         <div class="bg-light p-2 border border-1 border-black-50 mt-2">
                             <div class="title d-flex justify-content-between">
                                 <h2>{{ $post->title }}</h2>
