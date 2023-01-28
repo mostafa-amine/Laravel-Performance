@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\Category;
 use Database\Factories\PostFactory;
+use App\Models\Scopes\ArchivedScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
@@ -38,4 +40,17 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // Using Local Scope
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    protected static function booted()
+    {
+        // Anyounumous scope
+        static::addGlobalScope('ArchivedScope', function(Builder $builder){
+            $builder->where('status', 'draft');
+        });
+    }
 }
